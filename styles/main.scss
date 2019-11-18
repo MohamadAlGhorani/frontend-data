@@ -1,0 +1,50 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.h1 {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    margin-top: 2em;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.pie-chart {
+    margin: 0 auto;
+    display: block;
+    margin-top: 50px;
+}
+
+.arc {
+    stroke: white;
+    stroke-width: 0.3px;
+}
+
+.aantalObjecten {
+    display: none;
+    stroke: none;
+}
+
+.label {
+    display: none;
+    stroke: none;
+}
+
+.arc:hover {
+    opacity: 0.8;
+
+    .label {
+        display: block;
+    }
+
+    .aantalObjecten {
+        display: block;
+    }
+}
