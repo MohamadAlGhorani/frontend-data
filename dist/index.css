@@ -16,10 +16,11 @@ p {
   margin: 0 auto;
 }
 
-.pie-chart {
-  margin: 0 auto;
-  display: block;
-  margin-top: 50px;
+#dashboard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 50px;
 }
 
 .arc {

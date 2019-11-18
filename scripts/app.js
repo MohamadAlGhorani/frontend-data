@@ -61,34 +61,67 @@ runQuery(eindpoint, categorieQuery)
     })
 
 function makeBarChart(data) {
+    const marginBarChart = {
+        top: 20,
+        right: 20,
+        bottom: 20,
+        left: 20
+    }
+    const svgHeight = 380 - marginBarChart.right - marginBarChart.left;
+    const svgWidth = 500 - marginBarChart.top - marginBarChart.bottom;
+    const verticalBarSpace = 50;
+    const barHeight = 30;
+
     console.log(data)
+
     // define svg for barchart
     const svg2 = d3.select("#dashboard").append("svg")
-        .attr("width", "100%")
-        .attr('height', "500 ")
-        .append('g')
+        .attr("width", svgWidth)
+        .attr('height', svgHeight)
+        .attr("overflow", "visible")
         .attr('class', 'bar-chart')
-        .attr('transform', 'translate(' + width / 2 + ', ' + height / 2 + ')');
+
     const Yscale = d3.scaleLinear()
-        .nice()
         .domain([0, d3.max(data[0].continenten, d => d.aantalObjInGebied)])
-        .range([0, height])
+        .range([0, svgHeight])
+
     d3.select('.bar-chart').selectAll('.bar')
         .data(data[0].continenten)
         .enter()
         .append('rect')
-        .style('fill', 'black')
-        .attr('width', "35 ")
-        .attr('y', (d) => height - 3 * Yscale(d.aantalObjInGebied))
-        .attr('x', function (d, i) {
-            console.log(d, i);
-            return i * 50
-        })
-        .attr("height", d => Yscale(d))
         .attr('class', 'bar')
-        .style('height', function (d) {
-            const barHeight = d.aantalObjInGebied / 100
-            return barHeight + 'px'
+        .style('fill', 'red')
+        .attr('height', barHeight)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 25)
+        .attr('x', 25)
+        .attr('y', function (d, i) {
+            console.log(d, i);
+            return i * verticalBarSpace
+        })
+    d3.select('.bar-chart').selectAll('.bar-text')
+        .data(data[0].continenten)
+        .enter()
+        .append('text')
+        .attr('class', 'bar-text')
+        .style('fill', 'black')
+        .text(d => d.aantalObjInGebied)
+        .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
+        .attr('y', function (d, i) {
+            console.log(d, i);
+            return (i * verticalBarSpace) + barHeight / 2
+        })
+    d3.select('.bar-chart').selectAll('.bar-label')
+        .data(data[0].continenten)
+        .enter()
+        .append('text')
+        .attr('class', 'bar-label')
+        .attr('text-anchor', "end")
+        .style('fill', 'black')
+        .text(d => d.gebiedLabel)
+        .attr('x', 0)
+        .attr('y', function (d, i) {
+            console.log(d, i);
+            return (i * verticalBarSpace) + barHeight / 2
         })
 }
 
