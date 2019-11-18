@@ -82,7 +82,7 @@ These instructions will get you a copy of the project up and running on your loc
 ## Deployment
 I used Netlify te deploy my project more information about Netlify [click hier](https://www.netlify.com)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9038e2a3-13d4-44de-aee9-7f3814e8265a/deploy-status)](https://app.netlify.com/sites/functioneel-programmeren/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0e963bb2-7d04-48ff-89bd-0c927b04a952/deploy-status)](https://app.netlify.com/sites/frontend-data-cmd/deploys)
 
 
 ## Credits
