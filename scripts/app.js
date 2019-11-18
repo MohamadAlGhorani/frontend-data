@@ -81,27 +81,32 @@ function makeBarChart(data) {
         .attr("overflow", "visible")
         .attr('class', 'bar-chart')
 
+    const g = svg2.selectAll(".group-bar")
+        .data(data[0].continenten)
+        .enter().append('g')
+        .attr("class", "group-bar");
+
     const Yscale = d3.scaleLinear()
         .domain([0, d3.max(data[0].continenten, d => d.aantalObjInGebied)])
         .range([0, svgHeight])
 
-    d3.select('.bar-chart').selectAll('.bar')
+    d3.select('.group-bar').selectAll('.bar')
         .data(data[0].continenten)
         .enter()
-        .append('rect')
+    g.append('rect')
         .attr('class', 'bar')
         .style('fill', 'red')
         .attr('height', barHeight)
-        .attr("width", d => Yscale(d.aantalObjInGebied) + 25)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
         .attr('x', 25)
         .attr('y', function (d, i) {
             console.log(d, i);
             return i * verticalBarSpace
         })
-    d3.select('.bar-chart').selectAll('.bar-text')
+    d3.select('.group-bar').selectAll('.bar-text')
         .data(data[0].continenten)
         .enter()
-        .append('text')
+    g.append('text')
         .attr('class', 'bar-text')
         .style('fill', 'black')
         .text(d => d.aantalObjInGebied)
@@ -110,10 +115,10 @@ function makeBarChart(data) {
             console.log(d, i);
             return (i * verticalBarSpace) + barHeight / 2
         })
-    d3.select('.bar-chart').selectAll('.bar-label')
+    d3.select('.group-bar').selectAll('.bar-label')
         .data(data[0].continenten)
         .enter()
-        .append('text')
+    g.append('text')
         .attr('class', 'bar-label')
         .attr('text-anchor', "end")
         .style('fill', 'black')
