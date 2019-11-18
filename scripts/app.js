@@ -16,6 +16,7 @@ const arc = d3.arc()
 
 const color = d3.scaleOrdinal(d3.schemePaired);
 
+
 // pie generator
 const pie = d3.pie()
     .sort(null)
@@ -57,10 +58,10 @@ runQuery(eindpoint, categorieQuery)
     .then(loopData)
     .then(prettyData => {
         makePieChart(prettyData)
-        makeBarChart(prettyData)
+        // makeBarChart(prettyData)
     })
 
-function makeBarChart(data) {
+function makeBarChart(data, n) {
     const marginBarChart = {
         top: 20,
         right: 20,
@@ -80,43 +81,52 @@ function makeBarChart(data) {
         .attr('height', svgHeight)
         .attr("overflow", "visible")
         .attr('class', 'bar-chart')
-
+    console.log(data)
     const g = svg2.selectAll(".group-bar")
-        .data(data[0].continenten)
+        .data(data[n].continenten)
         .enter().append('g')
         .attr("class", "group-bar");
 
+
     const Yscale = d3.scaleLinear()
-        .domain([0, d3.max(data[0].continenten, d => d.aantalObjInGebied)])
+        .domain([0, d3.max(data[n].continenten, d => d.aantalObjInGebied)])
         .range([0, svgHeight])
 
     d3.select('.group-bar').selectAll('.bar')
-        .data(data[0].continenten)
+        .data(data[n].continenten)
         .enter()
     g.append('rect')
         .attr('class', 'bar')
         .style('fill', 'red')
-        .attr('height', barHeight)
-        .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
         .attr('x', 25)
         .attr('y', function (d, i) {
-            console.log(d, i);
+            // console.log(d, i);
             return i * verticalBarSpace
         })
+        .attr('height', barHeight)
+        .transition()
+        .ease(d3.easeLinear)
+        .duration(2000)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
+
     d3.select('.group-bar').selectAll('.bar-text')
-        .data(data[0].continenten)
+        .data(data[n].continenten)
         .enter()
     g.append('text')
         .attr('class', 'bar-text')
         .style('fill', 'black')
         .text(d => d.aantalObjInGebied)
-        .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
         .attr('y', function (d, i) {
-            console.log(d, i);
+            // console.log(d, i);
             return (i * verticalBarSpace) + barHeight / 2
         })
+        .transition()
+        .ease(d3.easeLinear)
+        .duration(2000)
+        .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
+
     d3.select('.group-bar').selectAll('.bar-label')
-        .data(data[0].continenten)
+        .data(data[n].continenten)
         .enter()
     g.append('text')
         .attr('class', 'bar-label')
@@ -125,7 +135,7 @@ function makeBarChart(data) {
         .text(d => d.gebiedLabel)
         .attr('x', 0)
         .attr('y', function (d, i) {
-            console.log(d, i);
+            // console.log(d, i);
             return (i * verticalBarSpace) + barHeight / 2
         })
 }
@@ -175,7 +185,16 @@ function makePieChart(data) {
         .text(function (d) {
             return d.data.countObj;
         });
+    console.log(data)
+    d3.selectAll(".arc")
+        .on("click", function () {
+            categorieNumber = this.__data__.index
+            return makeBarChart(data, categorieNumber)
+        })
 }
+
+
+
 
 // functie die zorgt dat alles op 0 staat voor dat de data binnen komt zodat de animatie werkt van de pie cahrt
 function pieTween(b) {

@@ -21,6 +21,7 @@ p {
   justify-content: space-around;
   align-items: center;
   padding-top: 50px;
+  width: 100%;
 }
 
 .arc {
@@ -46,6 +47,17 @@ p {
 }
 .arc:hover .aantalObjecten {
   display: block;
+}
+
+.bar-text {
+  display: none;
+}
+
+.group-bar:hover .bar-text {
+  display: block;
+}
+.group-bar:hover .bar {
+  opacity: 0.5;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -21,6 +21,7 @@ p {
     justify-content: space-around;
     align-items: center;
     padding-top: 50px;
+    width: 100%;
 }
 
 .arc {
@@ -47,5 +48,20 @@ p {
 
     .aantalObjecten {
         display: block;
+    }
+}
+
+.bar-text {
+    display: none;
+}
+
+.group-bar:hover {
+
+    .bar-text {
+        display: block;
+    }
+
+    .bar {
+        opacity: 0.5;
     }
 }
