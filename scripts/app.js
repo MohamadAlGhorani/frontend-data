@@ -34,6 +34,7 @@ const svg = d3.select("#dashboard").append("svg")
     .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
 
+
 const eindpoint = "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-22/sparql";
 const categorieLength = 19
 const categorieQuery = `
@@ -58,10 +59,13 @@ runQuery(eindpoint, categorieQuery)
     .then(loopData)
     .then(prettyData => {
         makePieChart(prettyData)
-        // makeBarChart(prettyData)
+        //makeBarChart(prettyData, 0)
     })
 
 function makeBarChart(data, n) {
+
+    d3.select(".bar-chart").remove().exit();
+
     const marginBarChart = {
         top: 20,
         right: 20,
@@ -81,12 +85,13 @@ function makeBarChart(data, n) {
         .attr('height', svgHeight)
         .attr("overflow", "visible")
         .attr('class', 'bar-chart')
-    console.log(data)
+
+    svg2.selectAll(".group-bar").remove().exit();
+
     const g = svg2.selectAll(".group-bar")
         .data(data[n].continenten)
         .enter().append('g')
         .attr("class", "group-bar");
-
 
     const Yscale = d3.scaleLinear()
         .domain([0, d3.max(data[n].continenten, d => d.aantalObjInGebied)])
@@ -106,7 +111,7 @@ function makeBarChart(data, n) {
         .attr('height', barHeight)
         .transition()
         .ease(d3.easeLinear)
-        .duration(2000)
+        .duration(800)
         .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
 
     d3.select('.group-bar').selectAll('.bar-text')
@@ -122,7 +127,7 @@ function makeBarChart(data, n) {
         })
         .transition()
         .ease(d3.easeLinear)
-        .duration(2000)
+        .duration(800)
         .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
 
     d3.select('.group-bar').selectAll('.bar-label')
@@ -162,7 +167,7 @@ function makePieChart(data) {
         })
         .transition()
         .ease(d3.easeLinear)
-        .duration(2000)
+        .duration(1000)
         .attrTween("d", pieTween);
 
     //appen the text (labels)
