@@ -7,14 +7,14 @@
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     margin-top: 2em;
-    padding-left: 5em;
+    padding-left: 50px;
 }
 
 p {
     width: 400px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
-    padding-left: 5em;
+    padding-left: 50px;
 }
 
 #dashboard {
@@ -40,17 +40,7 @@ p {
     stroke: none;
 }
 
-.arc:hover {
-    opacity: 0.8;
 
-    .label {
-        display: block;
-    }
-
-    .aantalObjecten {
-        display: block;
-    }
-}
 
 .bar-text {
     display: none;
@@ -64,5 +54,17 @@ p {
 
     .bar {
         opacity: 0.5;
+    }
+}
+
+.arc:hover {
+    opacity: 0.8;
+
+    .label {
+        display: block;
+    }
+
+    .aantalObjecten {
+        display: block;
     }
 }

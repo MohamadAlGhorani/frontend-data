@@ -117,7 +117,6 @@ function makeBarChart(data, n) {
         .enter()
     g.append('text')
         .attr('class', 'bar-text')
-        .style('fill', 'black')
         .text(d => d.aantalObjInGebied + " objecten")
         .attr('y', function (d, i) {
             return (i * verticalBarSpace) + barHeight / 2
@@ -133,12 +132,19 @@ function makeBarChart(data, n) {
     g.append('text')
         .attr('class', 'bar-label')
         .attr('text-anchor', "end")
-        .style('fill', 'black')
         .text(d => d.gebiedLabel)
         .attr('x', 0)
         .attr('y', function (d, i) {
             return (i * verticalBarSpace) + barHeight / 2
         })
+
+    const text = svg2.append('text')
+        .attr('class', 'bar-title')
+        .text(data[n].categoryLabel)
+        .attr('x', 25)
+        .attr('y', -30)
+        .style('font-size', '18')
+
 }
 
 function updateBarChart(data, n) {
@@ -160,7 +166,6 @@ function updateBarChart(data, n) {
     //update bars
     const bar = d3.selectAll('.bar')
         .data(data[n].continenten)
-    // .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
 
     bar.enter()
         .append('rect')
@@ -168,7 +173,7 @@ function updateBarChart(data, n) {
         .attr('class', 'bar')
         .transition()
         .ease(d3.easeLinear)
-        .duration(800)
+        .duration(500)
         .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
 
     bar.exit().remove()
@@ -176,14 +181,12 @@ function updateBarChart(data, n) {
     // update bar text (aantalobjecten)
     const barText = d3.selectAll('.bar-text')
         .data(data[n].continenten)
-    // .text(d => d.aantalObjInGebied)
-    // .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
 
     barText.enter()
         .append("text")
         .merge(barText)
         .attr("class", "bar-text")
-        .text(d => d.aantalObjInGebied)
+        .text(d => d.aantalObjInGebied + " objecten")
         .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
 
     barText.exit().remove()
@@ -191,8 +194,6 @@ function updateBarChart(data, n) {
     // update label 
     const barLabel = d3.selectAll('.bar-label')
         .data(data[n].continenten)
-    // .text(d => d.gebiedLabel)
-    // .attr('x', 0)
 
     barLabel.enter()
         .append("text")
@@ -202,6 +203,9 @@ function updateBarChart(data, n) {
         .attr('x', 0)
 
     barLabel.exit().remove()
+    //update title
+    d3.select('.bar-chart').select('.bar-title').text(data[n].categoryLabel);
+
 }
 
 function makePieChart(data) {
