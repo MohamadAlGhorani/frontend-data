@@ -76,7 +76,6 @@ runQuery(eindpoint, categorieQuery)
 
 function makeBarChart(data, n) {
     console.log(data)
-    d3.select(".bar-chart").remove().exit();
 
     // define svg for barchart
     const svg2 = d3.select("#dashboard").append("svg")
@@ -85,17 +84,19 @@ function makeBarChart(data, n) {
         .attr("overflow", "visible")
         .attr('class', 'bar-chart')
 
-    svg2.selectAll(".group-bar").remove().exit();
 
+    // genrate groups
     const g = svg2.selectAll(".group-bar")
         .data(data[n].continenten)
         .enter().append('g')
         .attr("class", "group-bar")
 
+    // make scale
     const Yscale = d3.scaleLinear()
         .domain([0, d3.max(data[n].continenten, d => d.aantalObjInGebied)])
         .range([0, svgHeight])
 
+    // make bars
     d3.select('.group-bar').selectAll('.bar')
         .data(data[n].continenten)
         .enter()
@@ -112,6 +113,7 @@ function makeBarChart(data, n) {
         .duration(800)
         .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
 
+    //make tool tip with aantalopbjecten
     d3.select('.group-bar').selectAll('.bar-text')
         .data(data[n].continenten)
         .enter()
@@ -126,6 +128,7 @@ function makeBarChart(data, n) {
         .duration(800)
         .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
 
+    // make labels
     d3.select('.group-bar').selectAll('.bar-label')
         .data(data[n].continenten)
         .enter()
@@ -137,8 +140,8 @@ function makeBarChart(data, n) {
         .attr('y', function (d, i) {
             return (i * verticalBarSpace) + barHeight / 2
         })
-
-    const text = svg2.append('text')
+    // make dynamisch title
+    svg2.append('text')
         .attr('class', 'bar-title')
         .text(data[n].categoryLabel)
         .attr('x', 25)
