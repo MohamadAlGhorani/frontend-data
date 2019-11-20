@@ -84,7 +84,6 @@ function makeBarChart(data, n) {
         .attr("overflow", "visible")
         .attr('class', 'bar-chart')
 
-
     // genrate groups
     const g = svg2.selectAll(".group-bar")
         .data(data[n].continenten)
@@ -140,6 +139,7 @@ function makeBarChart(data, n) {
         .attr('y', function (d, i) {
             return (i * verticalBarSpace) + barHeight / 2
         })
+
     // make dynamisch title
     svg2.append('text')
         .attr('class', 'bar-title')
@@ -154,6 +154,7 @@ function updateBarChart(data, n) {
 
     console.log(data[n])
 
+    // update groups
     const g = d3.selectAll(".group-bar")
         .data(data[n].continenten)
         .enter()
@@ -162,6 +163,7 @@ function updateBarChart(data, n) {
         .exit()
         .remove()
 
+    // get scale from the biggest category
     const Yscale = d3.scaleLinear()
         .domain([0, d3.max(data[0].continenten, d => d.aantalObjInGebied)])
         .range([0, svgHeight])
