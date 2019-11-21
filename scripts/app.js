@@ -1,3 +1,5 @@
+////////////////////////setup ////////////////////////
+//from https://www.youtube.com/watch?v=kK5kKA-0PUQ
 //margin, width and height and raduis for teh circle for pie-chart
 const margin = {
         top: 20,
@@ -44,6 +46,7 @@ const svgHeight = 380 - marginBarChart.right - marginBarChart.left;
 const svgWidth = 500 - marginBarChart.top - marginBarChart.bottom;
 const verticalBarSpace = 50;
 const barHeight = 30;
+///////////////////////////end setup ////////////////////////////////////
 
 
 
@@ -266,6 +269,7 @@ function makePieChart(data) {
 }
 
 // functie die zorgt dat alles op 0 staat voor dat de data binnen komt zodat de animatie werkt van de pie cahrt
+//from https://www.youtube.com/watch?v=kK5kKA-0PUQ
 function pieTween(b) {
     b.innerRadius = 0;
     const i = d3.interpolate({
