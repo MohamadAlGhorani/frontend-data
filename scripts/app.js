@@ -110,7 +110,7 @@ function makeBarChart(data, n) {
         .transition()
         .ease(d3.easeLinear)
         .duration(800)
-        .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 5)
 
     //make tool tip with aantalopbjecten
     d3.select('.group-bar').selectAll('.bar-text')
@@ -125,7 +125,7 @@ function makeBarChart(data, n) {
         .transition()
         .ease(d3.easeLinear)
         .duration(800)
-        .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
+        .attr('x', d => Yscale(d.aantalObjInGebied) + 50)
 
     // make labels
     d3.select('.group-bar').selectAll('.bar-label')
@@ -179,7 +179,7 @@ function updateBarChart(data, n) {
         .transition()
         .ease(d3.easeLinear)
         .duration(500)
-        .attr("width", d => Yscale(d.aantalObjInGebied) + 10)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 5)
 
     bar.exit().remove()
 
@@ -192,7 +192,7 @@ function updateBarChart(data, n) {
         .merge(barText)
         .attr("class", "bar-text")
         .text(d => d.aantalObjInGebied + " objecten")
-        .attr('x', d => Yscale(d.aantalObjInGebied) + 60)
+        .attr('x', d => Yscale(d.aantalObjInGebied) + 50)
 
     barText.exit().remove()
 
