@@ -1,4 +1,4 @@
-////////////////////////setup ////////////////////////
+//////////////////////// setup ////////////////////////
 //from https://www.youtube.com/watch?v=kK5kKA-0PUQ
 //margin, width and height and raduis for teh circle for pie-chart
 const margin = {
@@ -155,17 +155,7 @@ function makeBarChart(data, n) {
 
 function updateBarChart(data, n) {
 
-    console.log(data[n])
-
-    // update groups
-    const g = d3.selectAll(".group-bar")
-        .data(data[n].continenten)
-        .enter()
-        .append("g")
-        .attr("class", "group-bar")
-        .exit()
-        .remove()
-
+    //console.log(data[n])
     // get scale from the biggest category
     const Yscale = d3.scaleLinear()
         .domain([0, d3.max(data[0].continenten, d => d.aantalObjInGebied)])
@@ -263,6 +253,7 @@ function makePieChart(data) {
 
     d3.selectAll(".arc")
         .on("click", function () {
+            // console.dir(this)
             categorieNumber = this.__data__.index
             updateBarChart(data, categorieNumber)
         })
