@@ -198,6 +198,18 @@ function updateBarChart(data, n) {
         .merge(barLabel)
         .attr("class", "bar-label")
         .text(d => d.gebiedLabel)
+        .transition()
+        .ease(d3.easeLinear)
+        .duration(200)
+        .attr('y', 220)
+        .style("font-size", "3")
+        .transition()
+        .ease(d3.easeLinear)
+        .duration(300)
+        .attr('y', function (d, i) {
+            return (i * verticalBarSpace) + barHeight / 2
+        })
+        .style("font-size", "16")
         .attr('x', 0)
 
     barLabel.exit().remove()
