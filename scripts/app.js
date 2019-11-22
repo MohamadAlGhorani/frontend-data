@@ -46,9 +46,7 @@ const svgHeight = 380 - marginBarChart.right - marginBarChart.left;
 const svgWidth = 500 - marginBarChart.top - marginBarChart.bottom;
 const verticalBarSpace = 50;
 const barHeight = 30;
-///////////////////////////end setup ////////////////////////////////////
-
-
+/////////////////////////// end setup ////////////////////////////////////
 
 const eindpoint = "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-22/sparql";
 const categorieLength = 19
@@ -113,7 +111,7 @@ function makeBarChart(data, n) {
         .transition()
         .ease(d3.easeLinear)
         .duration(800)
-        .attr("width", d => Yscale(d.aantalObjInGebied) + 5)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 1)
 
     //make tool tip with aantalopbjecten
     d3.select('.group-bar').selectAll('.bar-text')
@@ -172,7 +170,7 @@ function updateBarChart(data, n) {
         .transition()
         .ease(d3.easeLinear)
         .duration(500)
-        .attr("width", d => Yscale(d.aantalObjInGebied) + 5)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 1)
 
     bar.exit().remove()
 
@@ -206,6 +204,9 @@ function updateBarChart(data, n) {
         .transition()
         .ease(d3.easeLinear)
         .duration(300)
+        .delay(function (d, i) {
+            return (i * 100) + barHeight / 2
+        })
         .attr('y', function (d, i) {
             return (i * verticalBarSpace) + barHeight / 2
         })
@@ -265,7 +266,7 @@ function makePieChart(data) {
 
     d3.selectAll(".arc")
         .on("click", function () {
-            // console.dir(this)
+            //console.dir(this)
             categorieNumber = this.__data__.index
             updateBarChart(data, categorieNumber)
         })
