@@ -72,7 +72,7 @@ runQuery(eindpoint, categorieQuery)
     .then(loopData)
     .then(prettyData => {
         makePieChart(prettyData)
-        makeBarChart(prettyData, 0, )
+        makeBarChart(prettyData, 0)
     })
 
 function makeBarChart(data, n) {
