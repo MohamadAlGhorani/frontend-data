@@ -149,6 +149,7 @@ function makeBarChart(data, n) {
         .attr('y', -30)
         .style('font-size', '18')
 
+    // on click update pie-chart
     d3.selectAll('.bar').on("click", function (d, i) {
         //console.dir(this)
         continentNaam = this.__data__.gebiedLabel
@@ -220,6 +221,7 @@ function updateBarChart(data, n, color) {
         .attr('x', 0)
 
     barLabel.exit().remove()
+
     //update title
     d3.select('.bar-chart').select('.bar-title').text(data[n].categoryLabel);
 
@@ -277,7 +279,8 @@ function makePieChart(data) {
         .attr('x', -25)
         .attr('y', -240)
         .style('font-size', '18')
-    // on click functies uitvoeren
+
+    // on click update bar-chart and reset the pie-cahrt 
     d3.selectAll(".arc")
         .on("click", function () {
             //console.dir(this)
@@ -298,6 +301,7 @@ function updatePieChart(data, continentNaam) {
             const aantalObjectenPerContinent = filterDataOpcontinentNaam.map(item => item.aantalObjInGebied)
             return aantalObjectenPerContinent[0]
         });
+
     // update the paths
     d3.selectAll("path")
         .data(updatedPie(data))
@@ -315,6 +319,7 @@ function updatePieChart(data, continentNaam) {
                 return arc(interpolate(t));
             };
         })
+
     //update the title
     d3.select('.pie-title')
         .data(data)
@@ -323,6 +328,7 @@ function updatePieChart(data, continentNaam) {
             const NaamVanDeContinent = filterDataOpcontinentNaam.map(item => item.gebiedLabel)
             return NaamVanDeContinent[0]
         });
+
     // update the number on hover
     d3.selectAll('.aantalObjecten')
         .text(function (d) {
@@ -355,6 +361,7 @@ function resetPieChart(data) {
                 return arc(interpolate(t));
             };
         })
+
     // update title
     d3.select('.pie-title').text("Totaal");
 
