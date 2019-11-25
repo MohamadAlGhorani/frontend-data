@@ -158,7 +158,6 @@ function makeBarChart(data, n) {
 }
 
 function updateBarChart(data, n, color) {
-
     //console.log(data[n])
     // get scale from the biggest category
     const Yscale = d3.scaleLinear()
@@ -270,13 +269,15 @@ function makePieChart(data) {
         .text(function (d) {
             return d.data.countObj;
         });
+
+    //add title
     svg.append('text')
         .attr('class', 'pie-title')
         .text("Totaal")
         .attr('x', -25)
         .attr('y', -240)
         .style('font-size', '18')
-
+    // on click functies uitvoeren
     d3.selectAll(".arc")
         .on("click", function () {
             //console.dir(this)
@@ -354,8 +355,10 @@ function resetPieChart(data) {
                 return arc(interpolate(t));
             };
         })
+    // update title
     d3.select('.pie-title').text("Totaal");
 
+    // update label in de pie-chart
     d3.selectAll('.aantalObjecten')
         .text(function (d) {
             return d.data.countObj
