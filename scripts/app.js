@@ -72,7 +72,7 @@ runQuery(eindpoint, categorieQuery)
     .then(loopData)
     .then(prettyData => {
         makePieChart(prettyData)
-        makeBarChart(prettyData, 0)
+        makeBarChart(prettyData, 0, )
     })
 
 function makeBarChart(data, n) {
@@ -102,7 +102,7 @@ function makeBarChart(data, n) {
         .enter()
     g.append('rect')
         .attr('class', 'bar')
-        .style('fill', 'red')
+        .style('fill', 'rgb(166, 206, 227)')
         .attr('x', 25)
         .attr('y', function (d, i) {
             return i * verticalBarSpace
@@ -149,9 +149,15 @@ function makeBarChart(data, n) {
         .attr('y', -30)
         .style('font-size', '18')
 
+    d3.selectAll('.bar').on("click", function (d, i) {
+        //console.dir(this)
+        continentNaam = this.__data__.gebiedLabel
+        updatePieChart(data, continentNaam)
+    })
+
 }
 
-function updateBarChart(data, n) {
+function updateBarChart(data, n, color) {
 
     //console.log(data[n])
     // get scale from the biggest category
@@ -166,6 +172,7 @@ function updateBarChart(data, n) {
     bar.enter()
         .append('rect')
         .merge(bar)
+        .style('fill', color)
         .attr('class', 'bar')
         .transition()
         .ease(d3.easeLinear)
@@ -263,14 +270,98 @@ function makePieChart(data) {
         .text(function (d) {
             return d.data.countObj;
         });
+    svg.append('text')
+        .attr('class', 'pie-title')
+        .text("Totaal")
+        .attr('x', -25)
+        .attr('y', -240)
+        .style('font-size', '18')
 
     d3.selectAll(".arc")
         .on("click", function () {
             //console.dir(this)
+            categroieColor = this.childNodes[0].style.fill
             categorieNumber = this.__data__.index
-            updateBarChart(data, categorieNumber)
+            updateBarChart(data, categorieNumber, categroieColor)
+            resetPieChart(data)
         })
 }
+
+// update pie-chart door de bar-chart
+function updatePieChart(data, continentNaam) {
+    //update data
+    const updatedPie = d3.pie()
+        .sort(null)
+        .value(function (d) {
+            const filterDataOpcontinentNaam = d.continenten.filter(item => item.gebiedLabel == continentNaam)
+            const aantalObjectenPerContinent = filterDataOpcontinentNaam.map(item => item.aantalObjInGebied)
+            return aantalObjectenPerContinent[0]
+        });
+    // update the paths
+    d3.selectAll("path")
+        .data(updatedPie(data))
+        .attr("d", arc)
+        .style("fill", function (d) {
+            return color(d.data.categoryLabel)
+        })
+        // this transition came from http://bl.ocks.org/dbuezas/9306799
+        .transition().duration(1000)
+        .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var interpolate = d3.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        })
+    //update the title
+    d3.select('.pie-title')
+        .data(data)
+        .text(function (d) {
+            const filterDataOpcontinentNaam = d.continenten.filter(item => item.gebiedLabel == continentNaam)
+            const NaamVanDeContinent = filterDataOpcontinentNaam.map(item => item.gebiedLabel)
+            return NaamVanDeContinent[0]
+        });
+    // update the number on hover
+    d3.selectAll('.aantalObjecten')
+        .text(function (d) {
+            const filterDataOpcontinentNaam = d.data.continenten.filter(item => item.gebiedLabel == continentNaam)
+            const aantalObjectenPerContinent = filterDataOpcontinentNaam.map(item => item.aantalObjInGebied)
+            return aantalObjectenPerContinent[0]
+        });
+}
+
+// rest pie-cahrt en laat het totaal zien 
+function resetPieChart(data) {
+    const resetPie = d3.pie()
+        .sort(null)
+        .value(function (d) {
+            return d.countObj
+        });
+    d3.selectAll("path")
+        .data(resetPie(data))
+        .attr("d", arc)
+        .style("fill", function (d) {
+            return color(d.data.categoryLabel)
+        })
+        // this transition came from http://bl.ocks.org/dbuezas/9306799
+        .transition().duration(1000)
+        .attrTween("d", function (d) {
+            this._current = this._current || d;
+            var interpolate = d3.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function (t) {
+                return arc(interpolate(t));
+            };
+        })
+    d3.select('.pie-title').text("Totaal");
+
+    d3.selectAll('.aantalObjecten')
+        .text(function (d) {
+            return d.data.countObj
+        });
+}
+
 
 // functie die zorgt dat alles op 0 staat voor dat de data binnen komt zodat de animatie werkt van de pie cahrt
 //from https://www.youtube.com/watch?v=kK5kKA-0PUQ
