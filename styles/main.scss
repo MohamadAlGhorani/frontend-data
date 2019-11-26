@@ -68,3 +68,14 @@ p {
         display: block;
     }
 }
+
+.y-axis text {
+    font: 10px sans-serif;
+}
+
+.y-axis path,
+.y-axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}

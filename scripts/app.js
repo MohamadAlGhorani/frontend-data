@@ -12,22 +12,25 @@ const margin = {
     raduis = width / 2;
 
 // arc generator
-const arc = d3.arc()
+const arc = d3
+    .arc()
     .outerRadius(raduis - 10)
     .innerRadius(raduis - 100);
 
 const color = d3.scaleOrdinal(d3.schemePaired);
 
-
 // pie generator
-const pie = d3.pie()
+const pie = d3
+    .pie()
     .sort(null)
     .value(function (d) {
-        return d.countObj
+        return d.countObj;
     });
 
 // define svg for pie-chart
-const svg = d3.select("#dashboard").append("svg")
+const svg = d3
+    .select("#dashboard")
+    .append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("class", "pie-chart")
@@ -41,15 +44,16 @@ const marginBarChart = {
     right: 20,
     bottom: 20,
     left: 20
-}
+};
 const svgHeight = 380 - marginBarChart.right - marginBarChart.left;
 const svgWidth = 500 - marginBarChart.top - marginBarChart.bottom;
 const verticalBarSpace = 50;
 const barHeight = 30;
 /////////////////////////// end setup ////////////////////////////////////
 
-const eindpoint = "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-22/sparql";
-const categorieLength = 19
+const eindpoint =
+    "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-22/sparql";
+const categorieLength = 19;
 const categorieQuery = `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
@@ -71,134 +75,150 @@ ORDER BY DESC(?choCount)`;
 runQuery(eindpoint, categorieQuery)
     .then(loopData)
     .then(prettyData => {
-        makePieChart(prettyData)
-        makeBarChart(prettyData, 0)
-    })
+        makePieChart(prettyData);
+        makeBarChart(prettyData, 0);
+    });
 
 function makeBarChart(data, n) {
-    console.log(data)
-
+    console.log(data);
     // define svg for barchart
-    const svg2 = d3.select("#dashboard").append("svg")
+    const svg2 = d3
+        .select("#dashboard")
+        .append("svg")
         .attr("width", svgWidth)
-        .attr('height', svgHeight)
+        .attr("height", svgHeight)
         .attr("overflow", "visible")
-        .attr('class', 'bar-chart')
+        .attr("class", "bar-chart");
 
     // genrate groups
-    const g = svg2.selectAll(".group-bar")
+    const g = svg2
+        .selectAll(".group-bar")
         .data(data[n].continenten)
-        .enter().append('g')
+        .enter()
+        .append("g")
         .attr("class", "group-bar")
+        .style("cursor", "pointer");
 
     // make scale
-    const Yscale = d3.scaleLinear()
+    const Yscale = d3
+        .scaleLinear()
         .domain([0, d3.max(data[n].continenten, d => d.aantalObjInGebied)])
-        .range([0, svgHeight])
+        .range([0, svgHeight]);
 
     // make bars
-    d3.select('.group-bar').selectAll('.bar')
+    d3.select(".group-bar")
+        .selectAll(".bar")
         .data(data[n].continenten)
-        .enter()
-    g.append('rect')
-        .attr('class', 'bar')
-        .style('fill', 'rgb(166, 206, 227)')
-        .attr('x', 25)
-        .attr('y', function (d, i) {
-            return i * verticalBarSpace
+        .enter();
+    g.append("rect")
+        .attr("class", "bar")
+        .style("fill", "rgb(166, 206, 227)")
+        .attr("x", 25)
+        .attr("y", function (d, i) {
+            return i * verticalBarSpace;
         })
-        .attr('height', barHeight)
+        .attr("height", barHeight)
         .transition()
         .ease(d3.easeLinear)
         .duration(800)
-        .attr("width", d => Yscale(d.aantalObjInGebied) + 1)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 1);
 
     //make tool tip with aantalopbjecten
-    d3.select('.group-bar').selectAll('.bar-text')
+    d3.select(".group-bar")
+        .selectAll(".bar-text")
         .data(data[n].continenten)
-        .enter()
-    g.append('text')
-        .attr('class', 'bar-text')
+        .enter();
+    g.append("text")
+        .attr("class", "bar-text")
         .text(d => d.aantalObjInGebied + " objecten")
-        .attr('y', function (d, i) {
-            return (i * verticalBarSpace) + barHeight / 2
+        .attr("y", function (d, i) {
+            return i * verticalBarSpace + barHeight / 2;
         })
         .transition()
         .ease(d3.easeLinear)
         .duration(800)
-        .attr('x', d => Yscale(d.aantalObjInGebied) + 50)
+        .attr("x", d => Yscale(d.aantalObjInGebied) + 50);
 
     // make labels
-    d3.select('.group-bar').selectAll('.bar-label')
+    d3.select(".group-bar")
+        .selectAll(".bar-label")
         .data(data[n].continenten)
-        .enter()
-    g.append('text')
-        .attr('class', 'bar-label')
-        .attr('text-anchor', "end")
+        .enter();
+    g.append("text")
+        .attr("class", "bar-label")
+        .attr("text-anchor", "end")
         .text(d => d.gebiedLabel)
-        .attr('x', 0)
-        .attr('y', function (d, i) {
-            return (i * verticalBarSpace) + barHeight / 2
-        })
+        .attr("x", 0)
+        .attr("y", function (d, i) {
+            return i * verticalBarSpace + barHeight / 2;
+        });
 
     // make dynamisch title
-    svg2.append('text')
-        .attr('class', 'bar-title')
+    svg2
+        .append("text")
+        .attr("class", "bar-title")
         .text(data[n].categoryLabel)
-        .attr('x', 25)
-        .attr('y', -30)
-        .style('font-size', '18')
+        .attr("x", 25)
+        .attr("y", -30)
+        .style("font-size", "18");
+
+    // assen toevoegen
+    var yAxis = d3.axisBottom(Yscale).ticks(5)
+    svg2.append("g")
+        .attr("transform", "translate(25,240)")
+        .attr("class", "y-axis")
+        .call(yAxis)
 
     // on click update pie-chart
-    d3.selectAll('.bar').on("click", function (d, i) {
+    d3.selectAll(".group-bar").on("click", function (d, i) {
         //console.dir(this)
-        continentNaam = this.__data__.gebiedLabel
-        updatePieChart(data, continentNaam)
-    })
-
+        continentNaam = this.__data__.gebiedLabel;
+        updatePieChart(data, continentNaam);
+    });
 }
 
 function updateBarChart(data, n, color) {
     //console.log(data[n])
     // get scale from the biggest category
-    const Yscale = d3.scaleLinear()
+    const Yscale = d3
+        .scaleLinear()
         .domain([0, d3.max(data[0].continenten, d => d.aantalObjInGebied)])
-        .range([0, svgHeight])
+        .range([0, svgHeight]);
 
     //update bars
-    const bar = d3.selectAll('.bar')
-        .data(data[n].continenten)
+    const bar = d3.selectAll(".bar").data(data[n].continenten);
 
-    bar.enter()
-        .append('rect')
+    bar
+        .enter()
+        .append("rect")
         .merge(bar)
-        .style('fill', color)
-        .attr('class', 'bar')
+        .style("fill", color)
+        .attr("class", "bar")
         .transition()
         .ease(d3.easeLinear)
         .duration(500)
-        .attr("width", d => Yscale(d.aantalObjInGebied) + 1)
+        .attr("width", d => Yscale(d.aantalObjInGebied) + 1);
 
-    bar.exit().remove()
+    bar.exit().remove();
 
     // update bar text (aantalobjecten)
-    const barText = d3.selectAll('.bar-text')
-        .data(data[n].continenten)
+    const barText = d3.selectAll(".bar-text").data(data[n].continenten);
 
-    barText.enter()
+    barText
+        .enter()
         .append("text")
         .merge(barText)
         .attr("class", "bar-text")
         .text(d => d.aantalObjInGebied + " objecten")
-        .attr('x', d => Yscale(d.aantalObjInGebied) + 50)
+        .attr("x", d => Yscale(d.aantalObjInGebied) + 50);
 
-    barText.exit().remove()
+    barText.exit().remove();
 
-    // update label 
-    const barLabel = d3.selectAll('.bar-label')
-        .data(data[n].continenten)
+    // update label
+    const barLabel = d3.selectAll(".bar-label").data(data[n].continenten);
 
-    barLabel.enter()
+    barLabel
+        .enter()
         .append("text")
         .merge(barLabel)
         .attr("class", "bar-label")
@@ -206,25 +226,26 @@ function updateBarChart(data, n, color) {
         .transition()
         .ease(d3.easeLinear)
         .duration(200)
-        .attr('y', 220)
+        .attr("y", 220)
         .style("font-size", "3")
         .transition()
         .ease(d3.easeLinear)
         .duration(300)
         .delay(function (d, i) {
-            return (i * 100) + barHeight / 2
+            return i * 100 + barHeight / 2;
         })
-        .attr('y', function (d, i) {
-            return (i * verticalBarSpace) + barHeight / 2
+        .attr("y", function (d, i) {
+            return i * verticalBarSpace + barHeight / 2;
         })
         .style("font-size", "16")
-        .attr('x', 0)
+        .attr("x", 0);
 
-    barLabel.exit().remove()
+    barLabel.exit().remove();
 
     //update title
-    d3.select('.bar-chart').select('.bar-title').text(data[n].categoryLabel);
-
+    d3.select(".bar-chart")
+        .select(".bar-title")
+        .text(data[n].categoryLabel);
 }
 
 function makePieChart(data) {
@@ -235,71 +256,80 @@ function makePieChart(data) {
     });
 
     //append g element (.arc)
-    const g = svg.selectAll(".arc")
+    const g = svg
+        .selectAll(".arc")
         .data(pie(data))
-        .enter().append('g')
-        .attr("class", "arc");
+        .enter()
+        .append("g")
+        .attr("class", "arc")
+        .style("cursor", "pointer");
 
     // append path to g(.arc)
     g.append("path")
         .attr("d", arc)
         .style("fill", function (d) {
-            return color(d.data.categoryLabel)
+            return color(d.data.categoryLabel);
         })
         .transition()
         .ease(d3.easeLinear)
         .duration(1000)
         .attrTween("d", pieTween);
 
+
     //appen the text (labels)
-    g.append('text')
-        .attr('transform', 'translate(0, 30)')
-        .attr('class', 'label')
-        .attr('text-anchor', 'middle')
-        .attr('font-size', '10')
+    g.append("text")
+        .attr("transform", "translate(0, 30)")
+        .attr("class", "label")
+        .attr("text-anchor", "middle")
+        .attr("font-size", 10)
         .attr("dy", ".35em")
         .text(function (d) {
             return d.data.categoryLabel;
         });
 
     // aantal objecten in het middle
-    g.append('text')
+    g.append("text")
         .attr("class", "aantalObjecten")
-        .attr('text-anchor', 'middle')
-        .attr('font-size', '28')
+        .attr("text-anchor", "middle")
+        .attr("font-size", "28")
         .attr("dy", ".35em")
         .text(function (d) {
             return d.data.countObj;
         });
 
     //add title
-    svg.append('text')
-        .attr('class', 'pie-title')
+    svg
+        .append("text")
+        .attr("class", "pie-title")
         .text("Totaal")
-        .attr('x', -25)
-        .attr('y', -240)
-        .style('font-size', '18')
+        .attr("x", -25)
+        .attr("y", -240)
+        .style("font-size", "18");
 
-    // on click update bar-chart and reset the pie-cahrt 
-    d3.selectAll(".arc")
-        .on("click", function () {
-            //console.dir(this)
-            categroieColor = this.childNodes[0].style.fill
-            categorieNumber = this.__data__.index
-            updateBarChart(data, categorieNumber, categroieColor)
-            resetPieChart(data)
-        })
+    // on click update bar-chart and reset the pie-cahrt
+    d3.selectAll(".arc").on("click", function () {
+        //console.dir(this)
+        categroieColor = this.childNodes[0].style.fill;
+        categorieNumber = this.__data__.index;
+        updateBarChart(data, categorieNumber, categroieColor);
+        resetPieChart(data);
+    });
 }
 
 // update pie-chart door de bar-chart
 function updatePieChart(data, continentNaam) {
     //update data
-    const updatedPie = d3.pie()
+    const updatedPie = d3
+        .pie()
         .sort(null)
         .value(function (d) {
-            const filterDataOpcontinentNaam = d.continenten.filter(item => item.gebiedLabel == continentNaam)
-            const aantalObjectenPerContinent = filterDataOpcontinentNaam.map(item => item.aantalObjInGebied)
-            return aantalObjectenPerContinent[0]
+            const filterDataOpcontinentNaam = d.continenten.filter(
+                item => item.gebiedLabel == continentNaam
+            );
+            const aantalObjectenPerContinent = filterDataOpcontinentNaam.map(
+                item => item.aantalObjInGebied
+            );
+            return aantalObjectenPerContinent[0];
         });
 
     // update the paths
@@ -307,10 +337,11 @@ function updatePieChart(data, continentNaam) {
         .data(updatedPie(data))
         .attr("d", arc)
         .style("fill", function (d) {
-            return color(d.data.categoryLabel)
+            return color(d.data.categoryLabel);
         })
         // this transition came from http://bl.ocks.org/dbuezas/9306799
-        .transition().duration(1000)
+        .transition()
+        .duration(1000)
         .attrTween("d", function (d) {
             this._current = this._current || d;
             var interpolate = d3.interpolate(this._current, d);
@@ -318,41 +349,50 @@ function updatePieChart(data, continentNaam) {
             return function (t) {
                 return arc(interpolate(t));
             };
-        })
+        });
 
     //update the title
-    d3.select('.pie-title')
+    d3.select(".pie-title")
         .data(data)
         .text(function (d) {
-            const filterDataOpcontinentNaam = d.continenten.filter(item => item.gebiedLabel == continentNaam)
-            const NaamVanDeContinent = filterDataOpcontinentNaam.map(item => item.gebiedLabel)
-            return NaamVanDeContinent[0]
+            const filterDataOpcontinentNaam = d.continenten.filter(
+                item => item.gebiedLabel == continentNaam
+            );
+            const NaamVanDeContinent = filterDataOpcontinentNaam.map(
+                item => item.gebiedLabel
+            );
+            return NaamVanDeContinent[0];
         });
 
     // update the number on hover
-    d3.selectAll('.aantalObjecten')
-        .text(function (d) {
-            const filterDataOpcontinentNaam = d.data.continenten.filter(item => item.gebiedLabel == continentNaam)
-            const aantalObjectenPerContinent = filterDataOpcontinentNaam.map(item => item.aantalObjInGebied)
-            return aantalObjectenPerContinent[0]
-        });
+    d3.selectAll(".aantalObjecten").text(function (d) {
+        const filterDataOpcontinentNaam = d.data.continenten.filter(
+            item => item.gebiedLabel == continentNaam
+        );
+        const aantalObjectenPerContinent = filterDataOpcontinentNaam.map(
+            item => item.aantalObjInGebied
+        );
+        return aantalObjectenPerContinent[0];
+    });
 }
 
-// rest pie-cahrt en laat het totaal zien 
+// rest pie-cahrt en laat het totaal zien
 function resetPieChart(data) {
-    const resetPie = d3.pie()
+    const resetPie = d3
+        .pie()
         .sort(null)
         .value(function (d) {
-            return d.countObj
+            return d.countObj;
         });
     d3.selectAll("path")
         .data(resetPie(data))
         .attr("d", arc)
         .style("fill", function (d) {
-            return color(d.data.categoryLabel)
+            return color(d.data.categoryLabel);
         })
         // this transition came from http://bl.ocks.org/dbuezas/9306799
-        .transition().duration(1000)
+        .transition()
+        .duration(1000)
         .attrTween("d", function (d) {
             this._current = this._current || d;
             var interpolate = d3.interpolate(this._current, d);
@@ -360,31 +400,30 @@ function resetPieChart(data) {
             return function (t) {
                 return arc(interpolate(t));
             };
-        })
+        });
 
     // update title
-    d3.select('.pie-title').text("Totaal");
+    d3.select(".pie-title").text("Totaal");
 
     // update label in de pie-chart
-    d3.selectAll('.aantalObjecten')
-        .text(function (d) {
-            return d.data.countObj
-        });
+    d3.selectAll(".aantalObjecten").text(function (d) {
+        return d.data.countObj;
+    });
 }
-
 
 // functie die zorgt dat alles op 0 staat voor dat de data binnen komt zodat de animatie werkt van de pie cahrt
 //from https://www.youtube.com/watch?v=kK5kKA-0PUQ
 function pieTween(b) {
     b.innerRadius = 0;
     const i = d3.interpolate({
-        startAngle: 0,
-        endAngle: 0
-    }, b);
+            startAngle: 0,
+            endAngle: 0
+        },
+        b
+    );
     return function (t) {
         return arc(i(t));
-    }
-
+    };
 }
 
 function getGeoQueryForCategory(category) {
@@ -419,34 +458,34 @@ function loopData(data) {
             return {
                 category: `<${item.category.value}>`,
                 categoryLabel: item.categoryLabel.value,
-                countObj: item.choCount.value,
-            }
+                countObj: item.choCount.value
+            };
         })
         .reduce(async (newData, currentItem) => {
-            const dataToReturn = await newData
-            const continentenVoorCurrentItem = await runQuery(eindpoint, getGeoQueryForCategory(currentItem.category))
-                .then(data => {
-                    return data
-                        .map(item => {
-                            return {
-                                gebiedLabel: item.continentLabel.value,
-                                aantalObjInGebied: Number(item.choCount.value)
-                            }
-                        })
-                })
+            const dataToReturn = await newData;
+            const continentenVoorCurrentItem = await runQuery(
+                eindpoint,
+                getGeoQueryForCategory(currentItem.category)
+            ).then(data => {
+                return data.map(item => {
+                    return {
+                        gebiedLabel: item.continentLabel.value,
+                        aantalObjInGebied: Number(item.choCount.value)
+                    };
+                });
+            });
 
-            currentItem.continenten = continentenVoorCurrentItem
-            dataToReturn.push(currentItem)
-            return dataToReturn
-        }, [])
+            currentItem.continenten = continentenVoorCurrentItem;
+            dataToReturn.push(currentItem);
+            return dataToReturn;
+        }, []);
 }
-
 
 function runQuery(url, query) {
     return fetch(url + "?query=" + encodeURIComponent(query) + "&format=json")
         .then(res => res.json())
         .then(data => data.results.bindings)
         .catch(error => {
-            console.log(error)
-        })
+            console.log(error);
+        });
 }
