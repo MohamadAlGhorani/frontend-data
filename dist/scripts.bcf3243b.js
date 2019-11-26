@@ -8619,8 +8619,6 @@ require("../styles.scss");
 require("./dataOphalen.js");
 
 require("babel-polyfill");
-
-console.log('ik ben blijjjj');
 },{"../styles.scss":"styles.scss","./dataOphalen.js":"scripts/dataOphalen.js","babel-polyfill":"../node_modules/babel-polyfill/lib/index.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
