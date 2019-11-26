@@ -1,0 +1,75 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.h1 {
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  margin-top: 2em;
+  padding-left: 50px;
+}
+
+p {
+  width: 400px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  padding-left: 50px;
+}
+
+#dashboard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 50px;
+  width: 100%;
+}
+
+.arc {
+  stroke: white;
+  stroke-width: 0.3px;
+}
+
+.aantalObjecten {
+  display: none;
+  stroke: none;
+}
+
+.label {
+  display: none;
+  stroke: none;
+}
+
+.bar-text {
+  display: none;
+}
+
+.group-bar:hover .bar-text {
+  display: block;
+}
+.group-bar:hover .bar {
+  opacity: 0.5;
+}
+
+.arc:hover {
+  opacity: 0.8;
+}
+.arc:hover .label {
+  display: block;
+}
+.arc:hover .aantalObjecten {
+  display: block;
+}
+
+.y-axis text {
+  font: 10px sans-serif;
+}
+
+.y-axis path,
+.y-axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/*# sourceMappingURL=/styles.164d45a1.css.map */

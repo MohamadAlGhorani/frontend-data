@@ -1,23 +1,23 @@
 {
-  "name": "functional-programming",
+  "name": "empty-project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "sass styles/main.scss dist/index.css --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/MohamadAlGhorani/functional-programming.git"
-  },
-  "author": "Mohamad Al Ghorani",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/MohamadAlGhorani/functional-programming/issues"
+  "scripts": {
+    "clean": "rm dist/bundle.js",
+    "start": "parcel src/index.html",
+    "build-prod": "parcel build src/index.html"
   },
-  "homepage": "https://github.com/MohamadAlGhorani/functional-programming#readme",
   "dependencies": {
-    "d3": "^5.12.0"
+    "babel-polyfill": "^6.26.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "parcel-bundler": "^1.12.4",
+    "sass": "^1.23.7"
   }
 }

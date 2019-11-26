@@ -61,4 +61,15 @@ p {
   display: block;
 }
 
-/*# sourceMappingURL=index.css.map */
+.y-axis text {
+  font: 10px sans-serif;
+}
+
+.y-axis path,
+.y-axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+/*# sourceMappingURL=/scripts.bcf3243b.css.map */
