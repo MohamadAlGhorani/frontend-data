@@ -176,7 +176,7 @@ function makeBarChart(data, n) {
         .call(yAxis)
 
     // on click update pie-chart
-    d3.selectAll(".group-bar").on("click", function (d, i) {
+    d3.selectAll(".bar").on("click", function (d, i) {
         //console.dir(this)
         continentNaam = this.__data__.gebiedLabel;
         updatePieChart(data, continentNaam);
