@@ -1,5 +1,12 @@
 //////////////////////// setup ////////////////////////
 //from https://www.youtube.com/watch?v=kK5kKA-0PUQ
+// function yolo() {
+//     return 'yolo';
+// }
+
+// export { yolo };
+
+// import { yolo } from './file.js'
 //margin, width and height and raduis for teh circle for pie-chart
 const margin = {
         top: 20,
@@ -53,8 +60,7 @@ const barHeight = 30;
 
 const eindpoint =
     "https://api.data.netwerkdigitaalerfgoed.nl/datasets/ivo/NMVW/services/NMVW-22/sparql";
-const categorieLength = 19;
-const categorieQuery = `
+const categoryQuery = `
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX dc: <http://purl.org/dc/elements/1.1/>
 PREFIX dct: <http://purl.org/dc/terms/>
@@ -72,7 +78,7 @@ SELECT ?category ?categoryLabel (COUNT(?cho) AS ?choCount) WHERE {
 GROUP BY ?category ?categoryLabel
 ORDER BY DESC(?choCount)`;
 
-runQuery(eindpoint, categorieQuery)
+runQuery(eindpoint, categoryQuery)
     .then(loopData)
     .then(prettyData => {
         makePieChart(prettyData);
@@ -162,7 +168,7 @@ function makeBarChart(data, n) {
         .attr("y", -30)
         .style("font-size", "18");
 
-    // assen toevoegen
+    // add axis
     var yAxis = d3.axisBottom(Yscale).ticks(5)
     svg2.append("g")
         .attr("transform", "translate(25,240)")
@@ -287,7 +293,7 @@ function makePieChart(data) {
             return d.data.categoryLabel;
         });
 
-    // aantal objecten in het middle
+    // sum objecten in the midle of the donut-chart
     g.append("text")
         .attr("class", "aantalObjecten")
         .attr("text-anchor", "middle")
@@ -376,7 +382,7 @@ function updatePieChart(data, continentNaam) {
     });
 }
 
-// rest pie-cahrt en laat het totaal zien
+// reset pie-cahrt en show the totaal.
 function resetPieChart(data) {
     const resetPie = d3
         .pie()
@@ -405,13 +411,13 @@ function resetPieChart(data) {
     // update title
     d3.select(".pie-title").text("Totaal");
 
-    // update label in de pie-chart
+    // update label in the pie-chart
     d3.selectAll(".aantalObjecten").text(function (d) {
         return d.data.countObj;
     });
 }
 
-// functie die zorgt dat alles op 0 staat voor dat de data binnen komt zodat de animatie werkt van de pie cahrt
+// this function makes sure that the start angel, end angle and the inner radius on 0 are. for the animation.
 //from https://www.youtube.com/watch?v=kK5kKA-0PUQ
 function pieTween(b) {
     b.innerRadius = 0;
