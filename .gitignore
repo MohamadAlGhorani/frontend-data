@@ -6,3 +6,4 @@ cleaning-data/enquete.json
 
 # System Files
 .DS_Store
+.cache
