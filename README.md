@@ -46,7 +46,7 @@ I used Netlify te deploy my project more information about Netlify [click hier](
 
 ## Credits
 
-Thanks to the museum of volkenkunde for sharing their data and hosting us at the museum. And thanks to my teachers and colleagues for their help and sharing their knowledge. Thanx to Karthik Thota for the [tutorial](https://www.youtube.com/watch?v=kK5kKA-0PUQ).
+Thanks to the museum of volkenkunde for sharing their data and hosting us at the museum. And thanks to my teachers and colleagues for their help and sharing their knowledge. Thanks to Karthik Thota for the [tutorial](https://www.youtube.com/watch?v=kK5kKA-0PUQ) and thanks to David Buezas for his [transition function](http://bl.ocks.org/dbuezas/9306799) of the pie-chart on update.
 
 
 ## Authors
