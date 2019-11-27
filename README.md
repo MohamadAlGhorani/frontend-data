@@ -1,4 +1,4 @@
-# functional-programming
+# frontend-data
 
 ![Screenshot 2019-11-13 at 22 03 01](https://user-images.githubusercontent.com/45425087/68804355-d7c7a080-0661-11ea-8dbb-e96810ed0acd.jpg)
 
