@@ -1,6 +1,6 @@
 # frontend-data
 
-![Screenshot 2019-11-13 at 22 03 01](https://user-images.githubusercontent.com/45425087/68804355-d7c7a080-0661-11ea-8dbb-e96810ed0acd.jpg)
+<img width="1280" alt="Screenshot 2019-11-27 at 12 54 33" src="https://user-images.githubusercontent.com/45425087/69721516-4b16eb00-1115-11ea-87a4-aefff7935f58.png">
 
 
 ## Het concept
