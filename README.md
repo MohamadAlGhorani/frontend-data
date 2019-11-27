@@ -29,7 +29,7 @@ en het aantal objecten per collectie, per categorieën heb ik de continenten en 
 
 [Hie kun je de queries bekijken die ik geschreven heb om de juiste data binnen te halen](https://github.com/MohamadAlGhorani/frontend-data/wiki/Data-en-SPARQUL-query).
 
-## installiation
+## Installation
 
 These instructions will get you a copy of the project up and running on your local machine.
 * If you dont have node js on your device download it first from [here](https://nodejs.org/en/).
