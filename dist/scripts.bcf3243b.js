@@ -367,7 +367,7 @@ function updateBarChart(data, n, color) {
   }).style("font-size", "16").attr("x", 0);
   barLabel.exit().remove(); //update title
 
-  d3.select(".bar-chart").select(".bar-title").text(data[n].categoryLabel);
+  d3.select(".bar-chart").select(".bar-title").text("Categorie: " + data[n].categoryLabel);
 }
 },{"./helpers.js":"scripts/helpers.js"}],"scripts/resetPieChart.js":[function(require,module,exports) {
 "use strict";
@@ -395,7 +395,7 @@ function resetPieChart(data) {
     };
   }); // update title
 
-  d3.select(".pie-title").text("Totaal"); // update label in the pie-chart
+  d3.select(".pie-title").text("Totaal").attr("x", -25); // update label in the pie-chart
 
   d3.selectAll(".aantalObjecten").text(function (d) {
     return d.data.countObj;
@@ -507,14 +507,14 @@ function updatePieChart(data, continentNaam) {
     };
   }); //update the title
 
-  d3.select(".pie-title").data(data).text(function (d) {
+  d3.select(".pie-title").data(data).attr("x", -80).text(function (d) {
     var filterDataOpcontinentNaam = d.continenten.filter(function (item) {
       return item.gebiedLabel == continentNaam;
     });
     var NaamVanDeContinent = filterDataOpcontinentNaam.map(function (item) {
       return item.gebiedLabel;
     });
-    return NaamVanDeContinent[0];
+    return "Alle objecten in " + NaamVanDeContinent[0];
   }); // update the number on hover
 
   d3.selectAll(".aantalObjecten").text(function (d) {
@@ -573,7 +573,7 @@ function makeBarChart(data, n) {
     return i * _helpers.verticalBarSpace + _helpers.barHeight / 2;
   }); // make dynamisch title
 
-  svg2.append("text").attr("class", "bar-title").text(data[n].categoryLabel).attr("x", 25).attr("y", -30).style("font-size", "18"); // add axis
+  svg2.append("text").attr("class", "bar-title").text("Categorie: " + data[n].categoryLabel).attr("x", 25).attr("y", -30).style("font-size", "18"); // add axis
 
   var yAxis = d3.axisBottom(Yscale).ticks(5);
   svg2.append("g").attr("transform", "translate(25,240)").attr("class", "y-axis").call(yAxis); // on click update pie-chart
@@ -8647,7 +8647,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50089" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51316" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

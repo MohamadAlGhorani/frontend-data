@@ -72,7 +72,7 @@ function updateBarChart(data, n, color) {
     //update title
     d3.select(".bar-chart")
         .select(".bar-title")
-        .text(data[n].categoryLabel);
+        .text("Categorie: " + data[n].categoryLabel);
 }
 
 export {

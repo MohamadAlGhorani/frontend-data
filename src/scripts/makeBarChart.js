@@ -87,7 +87,7 @@ function makeBarChart(data, n) {
     svg2
         .append("text")
         .attr("class", "bar-title")
-        .text(data[n].categoryLabel)
+        .text("Categorie: " + data[n].categoryLabel)
         .attr("x", 25)
         .attr("y", -30)
         .style("font-size", "18");

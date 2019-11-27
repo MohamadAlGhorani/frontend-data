@@ -40,6 +40,7 @@ function updatePieChart(data, continentNaam) {
     //update the title
     d3.select(".pie-title")
         .data(data)
+        .attr("x", -80)
         .text(function (d) {
             const filterDataOpcontinentNaam = d.continenten.filter(
                 item => item.gebiedLabel == continentNaam
@@ -47,7 +48,7 @@ function updatePieChart(data, continentNaam) {
             const NaamVanDeContinent = filterDataOpcontinentNaam.map(
                 item => item.gebiedLabel
             );
-            return NaamVanDeContinent[0];
+            return "Alle objecten in " + NaamVanDeContinent[0];
         });
 
     // update the number on hover

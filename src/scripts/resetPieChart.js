@@ -30,7 +30,7 @@ function resetPieChart(data) {
         });
 
     // update title
-    d3.select(".pie-title").text("Totaal");
+    d3.select(".pie-title").text("Totaal").attr("x", -25);
 
     // update label in the pie-chart
     d3.selectAll(".aantalObjecten").text(function (d) {
