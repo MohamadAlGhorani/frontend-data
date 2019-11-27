@@ -17,6 +17,9 @@ Ik ga een overziecht maken van de data. Ik wil de alle categorieën in een pie-c
 ## Functional programming pattren
 [click here](https://github.com/MohamadAlGhorani/functional-programming/wiki/Data-opschonen) 
 
+## D3 update pattren
+[click here]() 
+
 ## API reference
 
 I used SPARQL in this app to retrieve data from the museum's database. For more information about SPARQL [click here](https://nl.wikipedia.org/wiki/SPARQL)
