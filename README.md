@@ -10,9 +10,9 @@ Ik ga een overziecht maken van de data. Ik wil de alle categorieën in een pie-c
 ### De Opdrachtgever is Rick en mijn eindgebruiker is ook Rik.
 
 ## Features 
-* animatie
-* informatie geven on hover
-* verbonden charts
+* Animation
+* Giving information on hover
+* Connected charts
 
 ## Functional programming pattren
 [click here](https://github.com/MohamadAlGhorani/functional-programming/wiki/Data-opschonen) 
