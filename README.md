@@ -53,4 +53,4 @@ Thanks to the museum of volkenkunde for sharing their data and hosting us at the
 
 ## License
 
-Code is[MIT](https://github.com/MohamadAlGhorani/functional-programming/blob/master/LICENSE)
+Code is [MIT](https://github.com/MohamadAlGhorani/functional-programming/blob/master/LICENSE)
