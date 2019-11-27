@@ -34,7 +34,7 @@ en het aantal objecten per collectie, per categorieën heb ik de continenten en 
 These instructions will get you a copy of the project up and running on your local machine.
 * If you dont have node js on your device download it first from [here](https://nodejs.org/en/).
 * Download the project.
-* open the terminal and navigate to the project folder and run ```npm install``` to install the node modules. 
+* Open the terminal and navigate to the project folder and run ```npm install``` to install the node modules. 
 * Run in your terminal ``` npm start ``` to open the project in your favorite browser.
 
 
