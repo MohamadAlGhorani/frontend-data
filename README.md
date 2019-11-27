@@ -5,11 +5,14 @@
 
 ## Het concept
 
-Ik ga een overziecht maken van de data ik wil de alle categorieën in een piechart laten zien en als je op de piechart hovert krijg je dan de naam van de categorie en hoeveel objecten erin die aan een locatie toegewezen zijn. wat ik nog ga doen is dat als je op een van de categorieën klikt krijg je dan een andere chart te zien met de continenten en aantal objecten per continent van de gekozen categorie. Ik heb deze concept gekozen omdat ik het leuk vindt om Rik te helpen en zijn werk makkelijker maken door een overzicht aan hem te geven van alle objecten die de musea hebben en waar deze objecten vandaan komen zodat hij makkelijker een tentoonstelling kan maken.
+Ik ga een overziecht maken van de data. Ik wil de alle categorieën in een pie-chart laten zien en als je op de pie-chart hovert krijg je dan de naam van de categorie en hoeveel objecten erin zijn die aan een locatie zijn toegewezen. Daarnaast kan de gebruiker op een van de categorieën klikken. Zodat de gebruiker de bar-chart kan updaten. De bar-chart bevat de continenten en aantal objecten per continent van de gekozen categorie. Bovendien kan de gebruiker klikken op een van de continenten zodat de pie-chart aangepast wordt en laat objecten zien van de continenet die de gebruieker erop heeft geklikt. Ik heb deze concept gekozen omdat ik het leuk vindt om Rik te helpen en zijn werk makkelijker maken door een overzicht aan hem te geven van alle objecten die de musea hebben en waar deze objecten vandaan komen zodat hij makkelijker een tentoonstelling kan maken.
+
+### De Opdrachtgever is Rick en mijn eindgebruiker is ook Rik.
 
 ## Features 
 * animatie
 * informatie geven on hover
+* verbonden charts
 
 ## Functional programming pattren
 [click here](https://github.com/MohamadAlGhorani/functional-programming/wiki/Data-opschonen) 
@@ -23,16 +26,13 @@ en het aantal objecten per collectie, per categorieën heb ik de continenten en 
 
 [Hie kun je de queries bekijken die ik geschreven heb om de juiste data binnen te halen](https://github.com/MohamadAlGhorani/frontend-data/wiki/Data-en-SPARQUL-query).
 
-## Getting Started
+## installiation
 
 These instructions will get you a copy of the project up and running on your local machine.
-* If you dont hav node js on your device download it first from [here](https://nodejs.org/en/).
+* If you dont have node js on your device download it first from [here](https://nodejs.org/en/).
 * Download the project.
-* Open the folder with your favorite code editor.
-* open the terminal and navigate to the project folder and run ```npm install```. 
-* Run in your terminal ``` npm start ```That wil keep your css file in the dist updated for later deploy.
-* Open the index.html with live review in your code editor if you dont have it you can always download the extintion.
-* Or open the index.html in your browser.
+* open the terminal and navigate to the project folder and run ```npm install``` to install the node modules. 
+* Run in your terminal ``` npm start ``` to open the project in your favorite browser.
 
 
 ## Deployment
