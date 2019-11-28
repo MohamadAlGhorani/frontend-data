@@ -27,7 +27,7 @@ I used SPARQL in this app to retrieve data from the museum's database. For more 
 Om mijn concept tot leven te brengen heb ik de volgende data variabelen nodig: alle categorieën van de collectie 
 en het aantal objecten per collectie, per categorieën heb ik de continenten en he aantal objecten daarin. Daardoor moet ik een query schrijven die de categorieën ophaalt met het aantal objecten erin. En omdat er 19 hoofdcategorieën zijn heb ik dan per categorie een query moeten schrijven die de continenten van de categorie kan ophalen. 
 
-[Hie kun je de queries bekijken die ik geschreven heb om de juiste data binnen te halen](https://github.com/MohamadAlGhorani/frontend-data/wiki/Data-en-SPARQUL-query).
+[Hier kun je de queries bekijken die ik geschreven heb om de juiste data binnen te halen](https://github.com/MohamadAlGhorani/frontend-data/wiki/Data-en-SPARQUL-query).
 
 ## Installation
 
