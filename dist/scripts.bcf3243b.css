@@ -14,6 +14,12 @@ p {
   text-align: left;
 }
 
+.hint {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: left;
+  font-size: 12px;
+}
+
 #dashboard {
   display: flex;
   justify-content: space-around;
@@ -79,6 +85,7 @@ p {
 }
 .header .logo img {
   width: 300px;
+  margin-top: 1em;
 }
 
 /*# sourceMappingURL=/scripts.bcf3243b.css.map */
