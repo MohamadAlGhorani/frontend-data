@@ -18,7 +18,7 @@ Ik ga een overziecht maken van de data. Ik wil de alle categorieën in een pie-c
 [click here](https://github.com/MohamadAlGhorani/functional-programming/wiki/Data-opschonen) 
 
 ## D3 update pattren
-[click here]() 
+[click here](https://github.com/MohamadAlGhorani/frontend-data/wiki/Update-functies) 
 
 ## API reference
 
