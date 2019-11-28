@@ -15,7 +15,7 @@ Ik ga een overziecht maken van de data. Ik wil de alle categorieën in een pie-c
 * Connected charts
 
 ## Functional programming pattren
-[click here](https://github.com/MohamadAlGhorani/functional-programming/wiki/Data-opschonen) 
+[click here](https://github.com/MohamadAlGhorani/frontend-data/wiki/Data-opschonen) 
 
 ## D3 update pattren
 [click here](https://github.com/MohamadAlGhorani/frontend-data/wiki/Update-functies) 
@@ -56,4 +56,4 @@ Thanks to the museum of volkenkunde for sharing their data and hosting us at the
 
 ## License
 
-Code is [MIT](https://github.com/MohamadAlGhorani/functional-programming/blob/master/LICENSE)
+Code is [MIT](https://github.com/MohamadAlGhorani/frontend-data/blob/master/LICENSE)
